@@ -19,6 +19,7 @@
                 ZombieTypes.Add(new ZombieType() { TypeName = "Virus", Id = 1 });
                 ZombieTypes.Add(new ZombieType() { TypeName = "Contact", Id = 2 });
                 ZombieTypes.Add(new ZombieType() { TypeName = "Radioactif", Id = 3 });
+                ZombieTypes.Add(new ZombieType() { TypeName = "Sola", Id = 4 });
             };
 
             //Remplir la liste des Zombies

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ZombieParty.Models;
+using ZombieParty.ViewModels;
 
 namespace ZombieParty.Controllers
 {
@@ -16,13 +17,13 @@ namespace ZombieParty.Controllers
 
         public IActionResult Index()
         {
-            this.ViewBag.MaListe = _baseDonnees.ZombieTypes.ToList();
+            List<ZombieType> ZombieTypesList = _baseDonnees.ZombieTypes.ToList();
             {
                 //new ZombieType(){TypeName= "Virus", Id=1},
                 //new ZombieType(){TypeName= "Contact", Id=2}
             };
 
-            return View();
+            return View(ZombieTypesList);
         }
 
         //GET CREATE
@@ -48,6 +49,31 @@ namespace ZombieParty.Controllers
 
             return this.View(zombieType);
         }
+
+        public IActionResult Details(int id)
+        {
+            ZombieTypeVM zombieTypeVM = new()
+            {
+                ZombieType = new(),
+                ZombiesList = _baseDonnees.Zombies.Where(z => z.ZombieTypeId == id).ToList(),
+                ZombiesCount = _baseDonnees.Zombies.Count(),
+                PointsAverage = _baseDonnees.Zombies.Average(p => p.Point)
+
+
+            };
+
+            if (id == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                zombieTypeVM.ZombieType = _baseDonnees.ZombieTypes.FirstOrDefault(zt => zt.Id == id);
+                return View(zombieTypeVM);
+            }
+
+        }
+
 
     }
 }
