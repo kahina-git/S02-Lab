@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 //// Injection de dépendance du singleton 
 builder.Services.AddSingleton<BaseDonnees>();
 
