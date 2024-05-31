@@ -17,7 +17,7 @@ namespace ZombieParty.Controllers
         public IActionResult Index()
         {
             this.ViewBag.MaListe = _baseDonnees.Zombies.ToList();
-
+            //ViewBag.TotalZombies = 7;//_baseDonnees.Zombies.Count();
             return View();
         }
 
@@ -37,6 +37,7 @@ namespace ZombieParty.Controllers
             {
                 _baseDonnees.Zombies.Add(zombie);
                 TempData["Success"] = $"Zombie {zombie.Name} added";
+                //ViewBag.TotalZombies = 7;//_baseDonnees.Zombies.Count();
                 return this.RedirectToAction("Index");
             }
             //Il faut repopuler le zombieType dans le ViewBag
@@ -45,6 +46,7 @@ namespace ZombieParty.Controllers
             zombie.ZombieType = selectedZombieType;
 
             ViewBag.ZombieTypes = new SelectList(_baseDonnees.ZombieTypes.ToList(), "Id", "TypeName", selectedZombieType);
+            
 
             return View(zombie);
         }
